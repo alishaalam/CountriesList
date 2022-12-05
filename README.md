@@ -13,11 +13,8 @@ If the capital is not available, the view changes accordingly.
 
 ## Architecture Overview
 
-This app combines MVVM with Clean architecture & Repository pattern.
-* MVVM separates code from business logic.
-* Clean architecture takes it one step forward by separating the code in different modules or sections with specific responsibilities making it easier for maintenance and further modification. It also allows for loose coupling and also lends itself well to being easily testable
-* Repository Pattern - To seprate data layer from UI & Domain Layer
-
+This app uses a combination of the MVVM, Clean architecture, and Repository patterns to organize its code. MVVM separates the UI from the business logic, and Clean architecture takes this separation a step further by dividing the code into modules with specific responsibilities. This makes the code easier to maintain and modify. The Repository pattern is used to separate the data layer from the UI and domain layer.
+The app demonstrates the use of Retrofit to make REST requests to a web service, and Moshi to deserialize the JSON response into Kotlin data objects. For the UI, the app uses ViewModel, LiveData, and Data Binding with binding adapters. The Paging Library is used to get paged data from the network. For dependency injection, the app uses Hilt, which is a wrapper around Dagger.
 
 This app demonstrates the use of:  
 * Retrofit to make REST requests to the web service
@@ -41,15 +38,15 @@ This app demonstrates the use of:  
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 19
-- [Kotlin](https://kotlinlang.org/)
+- Written in [Kotlin](https://kotlinlang.org/)
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) for asynchronous operations
-- [Retrofit](https://github.com/square/retrofit) - construct the REST APIs and paging network data
-- [Moshi](https://github.com/square/moshi/) - A modern JSON library for Kotlin and Java
-- [Hilt](https://dagger.dev/hilt/)
+- [Retrofit](https://github.com/square/retrofit) for constructing the REST APIs and paging network data
+- [Moshi](https://github.com/square/moshi/) for A modern JSON library for Kotlin and Java
+- [Hilt](https://dagger.dev/hilt/) for dependency injection
 - Android Jetpack
-  - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Observing data when lifecycle state changes
-  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - UI Related data holder, lifecycle aware
-  - [Databinding](https://developer.android.com/topic/libraries/data-binding) - View Binding + Bind data from view to ViewModel
+  - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) for observing data when lifecycle state changes
+  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) for UI Related data holder, lifecycle aware
+  - [Databinding](https://developer.android.com/topic/libraries/data-binding) for view Binding + Bind data from view to ViewModel
   - [Android Paging v3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - Get paged data from network, display list using PagingDataAdapter in a recyclerView
 
 ## Project Setup
@@ -59,18 +56,18 @@ This app demonstrates the use of:  
 4. Build and run the sample.
 
 ## External Dependencies
-- [Retrofit](https://github.com/square/retrofit) - construct the REST APIs and paging network data.
-- [Moshi](https://github.com/square/moshi/) - A modern JSON library for Kotlin and Java.
-- [Hilt](https://dagger.dev/hilt/)
+- [Retrofit](https://github.com/square/retrofit) - Networking Library
+- [Moshi](https://github.com/square/moshi/) - Object Conversion
+- [Hilt](https://dagger.dev/hilt/) - Dependency injection Library
 
 ## Testing
 Added test cases to ensure the data in the view is being loaded properly
 
 ## Future Work 
-1. Improve UI
-    1. Show selection of item
-    2. Add pull to refresh
-2. Introduce offline first architecture by using Room
+1. Improve the user interface to make it more user-friendly and visually appealing.
+    1. Show the selection of items in the app, such as which items are currently selected.
+    2. Add a pull-to-refresh feature, which allows the user to swipe down to refresh the data displayed in the app.
+2. Introduce an offline-first architecture by using Room, a local database library, to store data locally and improve the app's performance and reliability.
 3. Leverage Paging Library 
     1. Showing page loader status
     2. Error & Retry Mechanism
