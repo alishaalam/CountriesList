@@ -1,0 +1,42 @@
+package com.app.countriesapplication
+
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.app.countriesapplication.ui.CountriesListFragment
+import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.Assert.*
+
+/**
+ * Instrumented test, which will execute on an Android device.
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+@RunWith(AndroidJUnit4::class)
+class InstrumentedTest : BaseTest(){
+    @Test
+    fun useAppContext() {
+        // Context of the app under test.
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        assertEquals("com.app.countriesapplication", appContext.packageName)
+    }
+
+    @Test
+    fun recycler_view_content() {
+        launchFragmentInContainer<CountriesListFragment>(themeResId = R.style.Theme_CountriesApplication)
+        waitForView(withText("Afghanistan,")).check(
+            matches(
+                isDisplayed()
+            )
+        )
+        waitForView(withText("Åland Islands,")).check(
+            matches(
+                isDisplayed()
+            )
+        )
+    }
+}
