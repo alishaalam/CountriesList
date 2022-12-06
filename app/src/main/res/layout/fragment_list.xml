@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.app.countriesapplication.ui.CountriesListViewModel" />
+        <variable
+            name="countryListAdapter"
+            type="com.app.countriesapplication.ui.CountryListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,9 +20,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/countries_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:padding="@dimen/padding_recyclerView"
+            android:adapter="@{countryListAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,5 +34,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/list_view_item" />
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

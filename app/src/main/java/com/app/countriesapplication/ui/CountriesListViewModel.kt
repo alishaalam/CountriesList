@@ -18,9 +18,9 @@ class CountriesListViewModel @Inject constructor(
 
     private val _countries = MutableLiveData<PagingData<Country>>()
 
-    suspend  fun getCountriesList() : LiveData<PagingData<Country>> {
-        val response = countriesRepository.getAllCountries().cachedIn(viewModelScope)
-        _countries.value = response.value
-        return response
+    suspend fun getCountriesList(): LiveData<PagingData<Country>> {
+                val response = countriesRepository.getAllCountries().cachedIn(viewModelScope)
+                _countries.value = response.value
+                return response
     }
 }

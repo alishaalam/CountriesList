@@ -7,8 +7,10 @@ import com.app.countriesapplication.network.CountriesListApiService
 import retrofit2.HttpException
 import java.io.IOException
 
+private const val DEFAULT_PAGE_INDEX = 1
+
 class CountriesPagingSource (
-    private val service: CountriesListApiService
+    val service: CountriesListApiService
 ) : PagingSource<Int, Country>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Country> {
         //for first case it will be null, then we can pass some default value, in our case it's 1
@@ -21,7 +23,7 @@ class CountriesPagingSource (
             // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
             // CallAdapter dispatches on a worker thread.
             val response = service.fetchCountriesList(pageNumber, params.loadSize)
-
+            Log.d(TAG, "Response from load() : $response")
             // Since 0 is the lowest page number, return null to signify no more pages should
             // be loaded before it.
             val prevKey = if (pageNumber > 0) pageNumber - 1 else null
@@ -29,15 +31,17 @@ class CountriesPagingSource (
             // This API defines that it's out of data when a page returns empty. When out of
             // data, we return `null` to signify no more pages should be loaded
             val nextKey = if (response.isNotEmpty()) pageNumber + 1 else null
-            Log.d("Alisha calling load", prevKey.toString() + " " + nextKey.toString())
+            Log.d("TAG", "PrevKey=$prevKey, NextKey=$nextKey")
             return LoadResult.Page(
                 data = response,
                 prevKey = prevKey,
                 nextKey = nextKey
             )
         } catch (e: IOException) {
+            Log.e(TAG, "IOException" + e.localizedMessage)
             LoadResult.Error(e)
         } catch (e: HttpException) {
+            Log.e(TAG, "HttpException"  + e.localizedMessage)
             LoadResult.Error(e)
         }
     }
@@ -50,7 +54,6 @@ class CountriesPagingSource (
     }
 
     companion object {
-        const val DEFAULT_PAGE_INDEX = 1
+        private val TAG = CountriesPagingSource::class.qualifiedName
     }
-
 }
